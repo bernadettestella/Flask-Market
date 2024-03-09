@@ -3,8 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///market.db'
-db = SQLAlchemy()
-db.init_app(app)
+db = SQLAlchemy(app)
 
 
 class Item(db.Model):
@@ -14,7 +13,9 @@ class Item(db.Model):
     barcode=db.Column(db.String(12), nullable=False, unique=True)
     description = db.Column(db.String(255), nullable=False, unique=True)
     
-
+    def __repr__(self):
+        return f'Item {self.name}'
+    
 
 @app.route('/')
 @app.route('/home')
@@ -27,15 +28,7 @@ def about_page():
   
 @app.route('/market')
 def market_page():
-    items = [
-    {'id': 1, 'name': 'Phone', 'barcode': '893212299897', 'price': 500},
-    {'id': 2, 'name': 'Laptop', 'barcode': '123985473165', 'price': 900},
-    {'id': 3, 'name': 'Keyboard', 'barcode': '231985128446', 'price': 150}
-]
+    items = Item.query.all()
     return render_template('market.html', items=items)
 
   
-if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-    app.run(debug=True)
