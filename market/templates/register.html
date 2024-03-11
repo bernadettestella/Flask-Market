@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}
+Register Page
+{% endblock %}
+
+{% block body %}
+  <body class="text-center">
+    <div class="container">
+        <form method="POST" class="form-register" style="color:white">
+            <img class="mb-4" src="https://res.cloudinary.com/jimshapedcoding/upload">
+            <h1 class="h3 mb-3 font-weight-normal">
+              <small>Please Create your Account</small>
+            </h1>
+            <br>
+            {{ form.hidden_tag() }}
+            {{ form.username.label }}
+            {{ form.username(class="form-control", placeholder="Username") }}
+            
+            {{ form.email.label }}
+            {{ form.email(class="form-control", placeholder="Email") }}
+            
+            {{ form.password.label }}
+            {{ form.password(class="form-control",  
+                             placeholder="Password") }}
+      
+            {{ form.confirm_password.label }}
+            {{ form.confirm_password(class="form-control", 
+                             placeholder="Confirm Password") }}
+            
+            <br>
+            
+             {{ form.submit(class="btn btn-primary btn-block btn-lg") }}
+            <br/>
+        
+        </form>
+        
+        <br><br>
+    </div>
+
+  </body>
+{% endblock %}
