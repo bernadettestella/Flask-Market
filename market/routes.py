@@ -45,10 +45,10 @@ def login_page():
     form = LoginForm()
     
     if form.validate_on_submit():
-        user = User.query.get(form.username.data).first()
+        user = User.query.filter_by(username=form.username.data).first()
         if user and user.check_password_correction(attempted_password=form.password.data):
            login_user(user)
-           flash ('Success! You are logged in as: {user.username}', category="success")
+           flash(f'Success! You are logged in as: {user.username}', category="success")
            return redirect(url_for('market_page'))
         else:
            flash('Incorrect username or password', category="danger")
