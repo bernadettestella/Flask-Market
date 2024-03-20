@@ -33,7 +33,7 @@
               <li class="nav-item">
                   <a class="nav-link" style="color: lawngreen; font-weight: bold;">
                       <i class="fas fa-coins"></i>
-                      {{ current_user.budget }}
+                      {{ current_user.prettier_budget }}
                     
                   </a>
               </li>
@@ -41,7 +41,7 @@
                 <a class="nav-link">Welcome, {{current_user.username}}!</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Logout</a>
+                <a class="nav-link" href="{{ url_for('logout_page')}}">Logout</a>
             </li>
          </ul>
           {% else %}
